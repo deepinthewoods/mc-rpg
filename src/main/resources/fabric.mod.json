@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "mc-rpg",
+	"version": "${version}",
+	"name": "mc-rpg",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/mc-rpg/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"ninja.trek.rpg.Mcrpg"
+		],
+		"client": [
+			"ninja.trek.rpg.McrpgClient"
+		],
+		"fabric-datagen": [
+			"ninja.trek.rpg.McrpgDataGenerator"
+		]
+	},
+	"mixins": [
+		"mc-rpg.mixins.json",
+		{
+			"config": "mc-rpg.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*",
+		"geckolib": "*"
+	}
+}
