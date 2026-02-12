@@ -1,0 +1,372 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.character.dwarf",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.8, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 10, 0]
+				},
+				{
+					"name": "torso_lower",
+					"parent": "body",
+					"pivot": [0, 10, 0],
+					"cubes": [
+						{
+							"origin": [-4.5, 10, -2.5],
+							"size": [9, 5, 5],
+							"uv": [16, 16]
+						}
+					]
+				},
+				{
+					"name": "torso_upper",
+					"parent": "torso_lower",
+					"pivot": [0, 15, 0],
+					"cubes": [
+						{
+							"origin": [-4.5, 15, -2.5],
+							"size": [9, 8, 5],
+							"uv": [16, 16]
+						}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "torso_upper",
+					"pivot": [0, 23, 0],
+					"cubes": [
+						{
+							"origin": [-4, 23, -4],
+							"size": [8, 8, 8],
+							"uv": [0, 0]
+						}
+					]
+				},
+				{
+					"name": "head_top",
+					"parent": "head",
+					"pivot": [0, 31, 0]
+				},
+				{
+					"name": "jaw",
+					"parent": "head",
+					"pivot": [0, 23, 0]
+				},
+				{
+					"name": "arm_right",
+					"parent": "torso_upper",
+					"pivot": [-5, 22, 0],
+					"cubes": [
+						{
+							"origin": [-7.5, 15, -2],
+							"size": [3.5, 7, 4],
+							"uv": [40, 16]
+						}
+					]
+				},
+				{
+					"name": "forearm_right",
+					"parent": "arm_right",
+					"pivot": [-5.5, 15, 0],
+					"cubes": [
+						{
+							"origin": [-7.5, 9, -2],
+							"size": [3.5, 6, 4],
+							"uv": [40, 28]
+						}
+					]
+				},
+				{
+					"name": "hand_right",
+					"parent": "forearm_right",
+					"pivot": [-5.5, 9, 0],
+					"cubes": [
+						{
+							"origin": [-7.5, 7, -2],
+							"size": [3.5, 2, 4],
+							"uv": [40, 39]
+						}
+					]
+				},
+				{
+					"name": "shoulder_armor_right",
+					"parent": "arm_right",
+					"pivot": [-5, 22, 0]
+				},
+				{
+					"name": "arm_left",
+					"parent": "torso_upper",
+					"pivot": [5, 22, 0],
+					"cubes": [
+						{
+							"origin": [4, 15, -2],
+							"size": [3.5, 7, 4],
+							"uv": [32, 48]
+						}
+					]
+				},
+				{
+					"name": "forearm_left",
+					"parent": "arm_left",
+					"pivot": [5.5, 15, 0],
+					"cubes": [
+						{
+							"origin": [4, 9, -2],
+							"size": [3.5, 6, 4],
+							"uv": [44, 48]
+						}
+					]
+				},
+				{
+					"name": "hand_left",
+					"parent": "forearm_left",
+					"pivot": [5.5, 9, 0],
+					"cubes": [
+						{
+							"origin": [4, 7, -2],
+							"size": [3.5, 2, 4],
+							"uv": [56, 48]
+						}
+					]
+				},
+				{
+					"name": "shoulder_armor_left",
+					"parent": "arm_left",
+					"pivot": [5, 22, 0]
+				},
+				{
+					"name": "leg_right",
+					"parent": "body",
+					"pivot": [-2, 10, 0],
+					"cubes": [
+						{
+							"origin": [-4, 4, -2],
+							"size": [4, 7, 4],
+							"uv": [0, 16]
+						}
+					]
+				},
+				{
+					"name": "shin_right",
+					"parent": "leg_right",
+					"pivot": [-2, 4, 0],
+					"cubes": [
+						{
+							"origin": [-4, 0, -2],
+							"size": [4, 6, 4],
+							"uv": [0, 28]
+						}
+					]
+				},
+				{
+					"name": "foot_right",
+					"parent": "shin_right",
+					"pivot": [-2, 0, 0],
+					"cubes": [
+						{
+							"origin": [-4, -2, -3],
+							"size": [4, 2, 5],
+							"uv": [0, 39]
+						}
+					]
+				},
+				{
+					"name": "thigh_armor_right",
+					"parent": "leg_right",
+					"pivot": [-2, 10, 0]
+				},
+				{
+					"name": "leg_left",
+					"parent": "body",
+					"pivot": [2, 10, 0],
+					"cubes": [
+						{
+							"origin": [0, 4, -2],
+							"size": [4, 7, 4],
+							"uv": [16, 48]
+						}
+					]
+				},
+				{
+					"name": "shin_left",
+					"parent": "leg_left",
+					"pivot": [2, 4, 0],
+					"cubes": [
+						{
+							"origin": [0, 0, -2],
+							"size": [4, 6, 4],
+							"uv": [0, 48]
+						}
+					]
+				},
+				{
+					"name": "foot_left",
+					"parent": "shin_left",
+					"pivot": [2, 0, 0],
+					"cubes": [
+						{
+							"origin": [0, -2, -3],
+							"size": [4, 2, 5],
+							"uv": [16, 58]
+						}
+					]
+				},
+				{
+					"name": "thigh_armor_left",
+					"parent": "leg_left",
+					"pivot": [2, 10, 0]
+				}
+			]
+		},
+		{
+			"description": {
+				"identifier": "geometry.character.dwarf.head_variant_1",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.8, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 10, 0]
+				},
+				{
+					"name": "head",
+					"parent": "body",
+					"pivot": [0, 23, 0],
+					"cubes": [
+						{
+							"origin": [-4.5, 23, -4.5],
+							"size": [9, 9, 9],
+							"uv": [0, 0],
+							"comment": "Larger head variant with broader features"
+						}
+					]
+				}
+			]
+		},
+		{
+			"description": {
+				"identifier": "geometry.character.dwarf.head_variant_2",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.8, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 10, 0]
+				},
+				{
+					"name": "head",
+					"parent": "body",
+					"pivot": [0, 23, 0],
+					"cubes": [
+						{
+							"origin": [-3.5, 23, -3.5],
+							"size": [7, 7, 7],
+							"uv": [0, 0],
+							"comment": "Compact head variant"
+						}
+					]
+				}
+			]
+		},
+		{
+			"description": {
+				"identifier": "geometry.character.dwarf.body_variant_1",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2.3,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.8, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 10, 0]
+				},
+				{
+					"name": "torso_upper",
+					"parent": "body",
+					"pivot": [0, 15, 0],
+					"cubes": [
+						{
+							"origin": [-5, 15, -3],
+							"size": [10, 9, 6],
+							"uv": [16, 16],
+							"comment": "Stocky body variant - very broad chest"
+						}
+					]
+				}
+			]
+		},
+		{
+			"description": {
+				"identifier": "geometry.character.dwarf.body_variant_2",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.8, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 10, 0]
+				},
+				{
+					"name": "torso_upper",
+					"parent": "body",
+					"pivot": [0, 15, 0],
+					"cubes": [
+						{
+							"origin": [-4, 15, -2],
+							"size": [8, 7, 4],
+							"uv": [16, 16],
+							"comment": "Leaner dwarf body variant"
+						}
+					]
+				}
+			]
+		}
+	]
+}
