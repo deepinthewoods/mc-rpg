@@ -184,8 +184,7 @@ button.danger {
 .dialog-node .node-text {
   font-size: 12px;
   color: #aaa;
-  max-height: 60px;
-  overflow: hidden;
+  word-wrap: break-word;
 }
 
 .badge {
@@ -230,4 +229,35 @@ button.danger {
 
 .quest-graph-node.selected {
   box-shadow: 0 0 16px rgba(233, 69, 96, 0.5);
+}
+
+/* Multi-selection highlight */
+.dialog-node.group-selected {
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.5);
+  outline: 2px solid rgba(0, 123, 255, 0.6);
+  outline-offset: 1px;
+}
+
+.dialog-node.group-selected.selected {
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.5);
+  border-color: #e94560;
+}
+
+.quest-graph-node.group-selected {
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.5);
+  outline: 2px solid rgba(0, 123, 255, 0.6);
+  outline-offset: 1px;
+}
+
+.quest-graph-node.group-selected.selected {
+  box-shadow: 0 0 16px rgba(233, 69, 96, 0.5), 0 0 12px rgba(0, 123, 255, 0.5);
+}
+
+/* Marquee selection rectangle */
+.selection-rect {
+  position: absolute;
+  border: 1px dashed #e94560;
+  background: rgba(233, 69, 96, 0.1);
+  pointer-events: none;
+  z-index: 10;
 }

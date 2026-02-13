@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { api } from '../api';
 
 export default function QuestEditor() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [ids, setIds] = useState<string[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [data, setData] = useState<any>(null);
@@ -11,6 +14,14 @@ export default function QuestEditor() {
 
   useEffect(() => { loadList(); }, []);
   const loadList = async () => { setIds(await api.listQuests()); };
+
+  // Auto-select from URL param
+  useEffect(() => {
+    const idParam = searchParams.get('id');
+    if (idParam && ids.length > 0 && !selected) {
+      loadQuest(idParam);
+    }
+  }, [ids]);
 
   const loadQuest = async (id: string) => {
     const quest = await api.getQuest(id);
@@ -51,9 +62,19 @@ export default function QuestEditor() {
     setRawJson(JSON.stringify(copy, null, 2));
   };
 
+  const openBtn = (path: string, value: string) => value ? (
+    <button className="secondary" style={{ padding: '2px 8px', fontSize: 11, flexShrink: 0 }}
+      onClick={() => navigate(`/${path}?id=${encodeURIComponent(value)}`)}>Open</button>
+  ) : null;
+
   return (
     <div>
-      <h2>Quests</h2>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <h2>Quests</h2>
+        {searchParams.get('from') === 'graph' && (
+          <button className="secondary" onClick={() => navigate('/quest-graph')} style={{ fontSize: 12 }}>Back to Graph</button>
+        )}
+      </div>
       <div className="two-column">
         <div className="panel">
           <div style={{ marginBottom: 10 }}>
@@ -78,18 +99,48 @@ export default function QuestEditor() {
             ) : (
               <>
                 <div className="form-group"><label>ID</label><input value={data.id} onChange={e => update('id', e.target.value)} /></div>
-                <div className="form-group"><label>Faction ID</label><input value={data.faction_id || ''} onChange={e => update('faction_id', e.target.value)} /></div>
+                <div className="form-group"><label>Faction ID</label>
+                  <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+                    {openBtn('factions', data.faction_id)}
+                    <input style={{ flex: 1 }} value={data.faction_id || ''} onChange={e => update('faction_id', e.target.value)} />
+                  </div>
+                </div>
                 <div className="form-group"><label>Level</label><input type="number" value={data.level || 1} onChange={e => update('level', parseInt(e.target.value) || 1)} /></div>
                 <div className="form-group"><label>Summary</label><textarea value={data.summary || ''} onChange={e => update('summary', e.target.value)} /></div>
-                <div className="form-group"><label>Dialog ID</label><input value={data.dialog_id || ''} onChange={e => update('dialog_id', e.target.value)} /></div>
-                <div className="form-group"><label>Location</label><input value={data.location || ''} onChange={e => update('location', e.target.value)} /></div>
+                <div className="form-group"><label>Dialog ID</label>
+                  <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+                    {openBtn('dialogs', data.dialog_id)}
+                    <input style={{ flex: 1 }} value={data.dialog_id || ''} onChange={e => update('dialog_id', e.target.value)} />
+                  </div>
+                </div>
+                <div className="form-group"><label>Location</label>
+                  <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+                    {openBtn('locations', data.location)}
+                    <input style={{ flex: 1 }} value={data.location || ''} onChange={e => update('location', e.target.value)} />
+                  </div>
+                </div>
                 <div className="form-group"><label>Characters (comma-separated)</label>
                   <input value={(data.characters || []).join(', ')} onChange={e => update('characters', e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean))} />
+                  {(data.characters || []).length > 0 && (
+                    <div style={{ display: 'flex', gap: 4, marginTop: 4, flexWrap: 'wrap' }}>
+                      {(data.characters || []).map((c: string) => (
+                        <button key={c} className="secondary" style={{ padding: '2px 8px', fontSize: 11 }}
+                          onClick={() => navigate(`/characters?id=${encodeURIComponent(c)}`)}>
+                          {c} &rarr;
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div className="form-group"><label>Consequential</label>
-                  <select value={data.consequential ? 'true' : 'false'} onChange={e => update('consequential', e.target.value === 'true')}>
-                    <option value="false">No</option><option value="true">Yes</option>
-                  </select>
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', fontSize: 14, color: '#e0e0e0', textTransform: 'none' }}>
+                      <input type="radio" name="consequential" checked={!data.consequential} onChange={() => update('consequential', false)} /> No
+                    </label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', fontSize: 14, color: '#e0e0e0', textTransform: 'none' }}>
+                      <input type="radio" name="consequential" checked={!!data.consequential} onChange={() => update('consequential', true)} /> Yes
+                    </label>
+                  </div>
                 </div>
                 <h4>Branches ({(data.branches || []).length})</h4>
                 {(data.branches || []).map((branch: any, i: number) => (

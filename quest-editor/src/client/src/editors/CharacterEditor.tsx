@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { api } from '../api';
 
 export default function CharacterEditor() {
+  const [searchParams] = useSearchParams();
   const [ids, setIds] = useState<string[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [data, setData] = useState<any>(null);
   const [newId, setNewId] = useState('');
 
   useEffect(() => { loadList(); }, []);
+
+  useEffect(() => {
+    const idParam = searchParams.get('id');
+    if (idParam && ids.length > 0 && !selected) loadCharacter(idParam);
+  }, [ids]);
 
   const loadList = async () => {
     const list = await api.listCharacters();

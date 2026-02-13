@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { api } from '../api';
 
 export default function FactionEditor() {
+  const [searchParams] = useSearchParams();
   const [ids, setIds] = useState<string[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [data, setData] = useState<any>(null);
@@ -9,6 +11,11 @@ export default function FactionEditor() {
 
   useEffect(() => { loadList(); }, []);
   const loadList = async () => { setIds(await api.listFactions()); };
+
+  useEffect(() => {
+    const idParam = searchParams.get('id');
+    if (idParam && ids.length > 0 && !selected) loadFaction(idParam);
+  }, [ids]);
 
   const loadFaction = async (id: string) => {
     setSelected(id);
