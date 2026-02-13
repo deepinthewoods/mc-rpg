@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mc-rpg-quest-editor": {
+      "command": "npx",
+      "args": ["tsx", "quest-editor/src/server/mcp.ts"]
+    }
+  }
+}

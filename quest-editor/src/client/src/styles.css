@@ -201,3 +201,33 @@ button.danger {
 .badge-completed { background: #007bff; }
 .badge-failed { background: #dc3545; }
 .badge-blocked { background: #6c757d; }
+
+/* Quest Graph Canvas */
+.quest-graph-canvas {
+  position: relative;
+  flex: 1;
+  min-height: 600px;
+  background: #111;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+.quest-graph-node {
+  position: absolute;
+  background: #16213e;
+  border: 2px solid #0f3460;
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 220px;
+  max-width: 260px;
+  cursor: move;
+  transition: box-shadow 0.2s;
+}
+
+.quest-graph-node:hover {
+  box-shadow: 0 0 12px rgba(233, 69, 96, 0.3);
+}
+
+.quest-graph-node.selected {
+  box-shadow: 0 0 16px rgba(233, 69, 96, 0.5);
+}

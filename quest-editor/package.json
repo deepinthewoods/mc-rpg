@@ -7,9 +7,11 @@
     "dev": "concurrently \"tsx watch src/server/index.ts\" \"vite\"",
     "build": "vite build && tsc -p tsconfig.server.json",
     "server": "tsx src/server/index.ts",
-    "client": "vite"
+    "client": "vite",
+    "mcp": "tsx src/server/mcp.ts"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
     "cors": "^2.8.5",
     "express": "^4.21.0"
   },

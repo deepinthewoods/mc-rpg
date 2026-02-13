@@ -20,6 +20,15 @@ async function deleteReq(url: string): Promise<any> {
   return res.json();
 }
 
+async function postJson(url: string, data?: any): Promise<any> {
+  const res = await fetch(BASE + url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: data ? JSON.stringify(data) : undefined
+  });
+  return res.json();
+}
+
 export const api = {
   // Characters
   listCharacters: () => fetchJson('/characters'),
@@ -52,5 +61,36 @@ export const api = {
   deleteDialog: (id: string) => deleteReq(`/dialogs/${id}`),
 
   // Validation
-  validate: () => fetchJson('/validation')
+  validate: () => fetchJson('/validation'),
+
+  // Lore
+  listLore: () => fetchJson('/lore'),
+  getLore: (id: string) => fetchJson(`/lore/${id}`),
+  saveLore: (id: string, data: any) => putJson(`/lore/${id}`, data),
+  deleteLore: (id: string) => deleteReq(`/lore/${id}`),
+
+  // Writing Styles
+  listWritingStyles: () => fetchJson('/writing-styles'),
+  getWritingStyle: (id: string) => fetchJson(`/writing-styles/${id}`),
+  saveWritingStyle: (id: string, data: any) => putJson(`/writing-styles/${id}`, data),
+  deleteWritingStyle: (id: string) => deleteReq(`/writing-styles/${id}`),
+
+  // Drafts
+  listDrafts: (type?: string) => fetchJson(`/drafts${type ? `?type=${type}` : ''}`),
+  getDraft: (type: string, id: string) => fetchJson(`/drafts/${type}/${id}`),
+  saveDraft: (type: string, id: string, data: any) => putJson(`/drafts/${type}/${id}`, data),
+  deleteDraft: (type: string, id: string) => deleteReq(`/drafts/${type}/${id}`),
+  promoteDraft: (type: string, id: string) => postJson(`/drafts/${type}/${id}/promote`),
+
+  // Faction Relationships
+  getFactionRelationships: () => fetchJson('/faction-relationships'),
+  saveFactionRelationships: (data: any) => putJson('/faction-relationships', data),
+
+  // Analysis
+  getQuestGraph: (factionId?: string) => fetchJson(`/analysis/quest-graph${factionId ? `?faction_id=${factionId}` : ''}`),
+  getFactionQuestChain: (factionId: string) => fetchJson(`/analysis/faction-quest-chain/${factionId}`),
+  simulateWorldState: (completedQuests: any[]) => postJson('/analysis/world-state', { completed_quests: completedQuests }),
+  getCharacterArc: (id: string) => fetchJson(`/analysis/character-arc/${id}`),
+  getFactionConnections: (a: string, b: string) => fetchJson(`/analysis/faction-connections/${a}/${b}`),
+  validateQuestChain: (factionId?: string) => fetchJson(`/analysis/validate-quest-chain${factionId ? `?faction_id=${factionId}` : ''}`)
 };
