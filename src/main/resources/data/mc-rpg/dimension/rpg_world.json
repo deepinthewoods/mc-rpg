@@ -1,0 +1,7 @@
+{
+  "type": "mc-rpg:rpg_world",
+  "generator": {
+    "type": "mc-rpg:rpg_terrain",
+    "biome": "mc-rpg:rpg_plains"
+  }
+}

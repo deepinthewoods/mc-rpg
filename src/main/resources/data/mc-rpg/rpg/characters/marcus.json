@@ -1,0 +1,24 @@
+{
+  "id": "marcus",
+  "name": "Marcus the Barman",
+  "appearance": {
+    "race": "human",
+    "gender": "male",
+    "age_range": "middle-aged",
+    "notable_features": ["thick mustache", "barrel-chested", "ale-stained apron"]
+  },
+  "personality": "Jovial and welcoming to regulars, sharp-eyed and protective of his establishment",
+  "speech": {
+    "formality": "casual",
+    "vocabulary": "simple, food and drink metaphors",
+    "verbal_tics": ["'ey now", "I'll tell ya what"],
+    "avoids": ["complex words", "formal titles"],
+    "sample_lines": [
+      "'Ey now, what can I get ya?",
+      "This ale won't drink itself, friend!",
+      "I'll tell ya what, business has been rough lately."
+    ]
+  },
+  "backstory": "Inherited the Brightmug Tavern from his father twenty years ago. Has connections from a rough youth spent on the streets, but has since settled into the role of a friendly barman who keeps secrets.",
+  "home_location": "brightmug_tavern"
+}

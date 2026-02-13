@@ -1,0 +1,10 @@
+{
+  "id": "tavern",
+  "name": "The Brightmug Tavern",
+  "unlocked": true,
+  "stats": {
+    "reputation": 0,
+    "wealth": 5
+  },
+  "members": ["marcus"]
+}

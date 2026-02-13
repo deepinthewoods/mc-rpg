@@ -3,13 +3,18 @@ package ninja.trek.rpg.entity;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import ninja.trek.rpg.dialog.DialogManager;
 import ninja.trek.rpg.entity.data.CharacterAppearance;
 import ninja.trek.rpg.entity.data.Race;
 import ninja.trek.rpg.entity.layer.LayerConfiguration;
@@ -43,6 +48,8 @@ public class NpcEntity extends PathfinderMob implements GeoEntity {
     private static final EntityDataAccessor<String> DATA_CUSTOM_MODEL =
         SynchedEntityData.defineId(NpcEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> DATA_CUSTOM_TEXTURE =
+        SynchedEntityData.defineId(NpcEntity.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<String> DATA_CHARACTER_ID =
         SynchedEntityData.defineId(NpcEntity.class, EntityDataSerializers.STRING);
 
     // Character data
@@ -85,6 +92,7 @@ public class NpcEntity extends PathfinderMob implements GeoEntity {
         builder.define(DATA_RACE, "human");
         builder.define(DATA_CUSTOM_MODEL, "");
         builder.define(DATA_CUSTOM_TEXTURE, "");
+        builder.define(DATA_CHARACTER_ID, "");
     }
 
     /**
@@ -162,6 +170,26 @@ public class NpcEntity extends PathfinderMob implements GeoEntity {
 
     public void setCustomTexturePath(String path) {
         this.entityData.set(DATA_CUSTOM_TEXTURE, path != null ? path : "");
+    }
+
+    public String getCharacterId() {
+        return this.entityData.get(DATA_CHARACTER_ID);
+    }
+
+    public void setCharacterId(String characterId) {
+        this.entityData.set(DATA_CHARACTER_ID, characterId != null ? characterId : "");
+    }
+
+    @Override
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (!level().isClientSide() && player instanceof ServerPlayer serverPlayer) {
+            String characterId = getCharacterId();
+            if (!characterId.isEmpty()) {
+                DialogManager.handleNpcInteraction(serverPlayer, characterId, this);
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return super.mobInteract(player, hand);
     }
 
     public boolean isAttacking() {
@@ -243,6 +271,11 @@ public class NpcEntity extends PathfinderMob implements GeoEntity {
         if (customTexture != null && !customTexture.isEmpty()) {
             tag.putString("CustomTexture", customTexture);
         }
+
+        String characterId = getCharacterId();
+        if (characterId != null && !characterId.isEmpty()) {
+            tag.putString("CharacterId", characterId);
+        }
     }
 
     @Override
@@ -269,5 +302,6 @@ public class NpcEntity extends PathfinderMob implements GeoEntity {
 
         tag.getString("CustomModel").ifPresent(this::setCustomModelPath);
         tag.getString("CustomTexture").ifPresent(this::setCustomTexturePath);
+        tag.getString("CharacterId").ifPresent(this::setCharacterId);
     }
 }

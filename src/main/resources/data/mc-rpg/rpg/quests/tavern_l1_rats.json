@@ -1,0 +1,58 @@
+{
+  "id": "L1_rats",
+  "faction_id": "tavern",
+  "level": 1,
+  "consequential": false,
+  "summary": "Marcus has a rat problem in the cellar. He needs someone to clear them out before they ruin his ale supply.",
+  "dialog_id": "tavern_l1_rats",
+  "location": "brightmug_tavern",
+  "characters": ["marcus"],
+  "requirements": {},
+  "branches": [
+    {
+      "id": "kill_rats",
+      "summary": "Clear the rats from the cellar by force.",
+      "requirements": {},
+      "outcomes": {
+        "faction_stats": {
+          "tavern.reputation": 1
+        },
+        "global_vars": {
+          "tavern_cellar_clear": true
+        },
+        "character_extras": [
+          {
+            "character": "marcus",
+            "text": "Grateful to the adventurer for clearing the cellar"
+          }
+        ]
+      }
+    },
+    {
+      "id": "poison_rats",
+      "summary": "Use rat poison to deal with the infestation.",
+      "requirements": {
+        "item_requirements": {
+          "minecraft:fermented_spider_eye": 3
+        }
+      },
+      "outcomes": {
+        "faction_stats": {
+          "tavern.reputation": 1,
+          "tavern.wealth": -1
+        },
+        "global_vars": {
+          "tavern_cellar_clear": true,
+          "used_poison": true
+        }
+      }
+    }
+  ],
+  "auto_resolve": {
+    "type": "weighted_random",
+    "weights": {
+      "kill_rats": 70,
+      "poison_rats": 30
+    }
+  }
+}

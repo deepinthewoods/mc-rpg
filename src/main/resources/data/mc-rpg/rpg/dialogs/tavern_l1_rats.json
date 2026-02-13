@@ -1,0 +1,82 @@
+{
+  "id": "tavern_l1_rats",
+  "start_node": "greeting",
+  "nodes": {
+    "greeting": {
+      "id": "greeting",
+      "speaker": "marcus",
+      "text": "'Ey now, glad you're here! I've got a bit of a problem down in the cellar. Rats — big ones too. They're getting into me ale barrels and I can't have that.",
+      "responses": [
+        {
+          "text": "I'll take care of them. Where's the cellar?",
+          "next_node": "accept_fight"
+        },
+        {
+          "text": "Maybe I could poison them instead?",
+          "next_node": "poison_option",
+          "condition": {
+            "has_item": "minecraft:fermented_spider_eye",
+            "has_item_count": 3
+          }
+        },
+        {
+          "text": "Sounds like your problem, not mine.",
+          "next_node": "decline"
+        }
+      ]
+    },
+    "accept_fight": {
+      "id": "accept_fight",
+      "speaker": "marcus",
+      "text": "That's the spirit! Head through the back door and down the stairs. Watch yourself — they bite something fierce. Come back when they're dealt with and I'll set you up with a drink on the house.",
+      "responses": [
+        {
+          "text": "Consider it done.",
+          "next_node": "end_fight"
+        }
+      ]
+    },
+    "poison_option": {
+      "id": "poison_option",
+      "speaker": "marcus",
+      "text": "Poison, eh? I suppose that'd work too, though it'll cost us a few supplies. If you've got the stuff, go ahead and set it up down there.",
+      "responses": [
+        {
+          "text": "I'll set the poison traps now.",
+          "next_node": "end_poison"
+        },
+        {
+          "text": "Actually, I'll just fight them myself.",
+          "next_node": "accept_fight"
+        }
+      ]
+    },
+    "decline": {
+      "id": "decline",
+      "speaker": "marcus",
+      "text": "I'll tell ya what, that's a shame. If you change your mind, you know where to find me.",
+      "responses": []
+    },
+    "end_fight": {
+      "id": "end_fight",
+      "speaker": "marcus",
+      "text": "Good luck down there, friend!",
+      "responses": [],
+      "outcome": {
+        "select_branch": "kill_rats"
+      }
+    },
+    "end_poison": {
+      "id": "end_poison",
+      "speaker": "marcus",
+      "text": "Alright, just don't get any of that stuff in the ale, eh?",
+      "responses": [],
+      "outcome": {
+        "select_branch": "poison_rats",
+        "take_items": {
+          "minecraft:fermented_spider_eye": 3
+        }
+      }
+    }
+  }
+}

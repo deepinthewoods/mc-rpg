@@ -1,0 +1,38 @@
+{
+  "id": "brightmug_tavern",
+  "name": "The Brightmug Tavern",
+  "tags": ["indoor", "public", "safe", "social", "commerce"],
+  "default_connections": ["town_square", "back_alley"],
+  "states": {
+    "normal": {
+      "description": "A warm, bustling tavern with a crackling hearth and the smell of fresh ale. Regulars fill the wooden benches, and a bard strums softly in the corner.",
+      "atmosphere": {
+        "lighting": "Warm firelight from a large stone hearth",
+        "sounds": "Murmur of conversation, clinking mugs, distant bard music",
+        "smells": "Fresh ale, roasting meat, pipe smoke",
+        "mood": "Welcoming and safe"
+      }
+    },
+    "burned": {
+      "description": "The once-cozy tavern lies in charred ruins. Ash and soot cover everything. The stone hearth stands alone amid collapsed timbers.",
+      "atmosphere": {
+        "lighting": "Grey daylight through missing roof",
+        "sounds": "Wind through rubble, occasional creak of timber",
+        "smells": "Ash, wet charcoal, lingering smoke",
+        "mood": "Somber and desolate"
+      },
+      "connections": ["town_square"]
+    },
+    "rebuilt": {
+      "description": "The tavern has been rebuilt with fresh timber and a new stone hearth. It smells of sawdust and new beginnings. Fewer patrons, but a hopeful atmosphere.",
+      "atmosphere": {
+        "lighting": "Bright, fresh torchlight",
+        "sounds": "Hammering in the distance, quiet conversation",
+        "smells": "Fresh-cut wood, new paint, ale",
+        "mood": "Hopeful and determined"
+      },
+      "connections": ["town_square", "back_alley", "marketplace"]
+    }
+  },
+  "default_state": "normal"
+}
